@@ -1,0 +1,139 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #eef2f7, #f9fbfd);
+  color: #2c2c2c;
+  line-height: 1.6;
+}
+
+.app {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.app > p {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 28px;
+}
+
+.form-section,
+.preview-section {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.form-section h2 {
+  font-size: 18px;
+  margin: 18px 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #111827;
+}
+
+.form-section input,
+.form-section textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  background-color: #fafafa;
+}
+
+.form-section textarea {
+  resize: vertical;
+}
+
+.form-section input::placeholder,
+.form-section textarea::placeholder {
+  color: #9ca3af;
+}
+
+.form-section input:focus,
+.form-section textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.preview-section {
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
+.preview-section h2 {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.preview-section h4 {
+  font-size: 15px;
+  color: #6366f1;
+  margin: 4px 0 12px;
+}
+
+.preview-section p {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #374151;
+}
+
+.preview-section h3 {
+  margin-top: 18px;
+  margin-bottom: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 4px;
+}
+
+.preview-section {
+  background: linear-gradient(180deg, #ffffff, #fafafa);
+}
+
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-section {
+    position: static;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 26px;
+  }
+
+  .form-section,
+  .preview-section {
+    padding: 18px;
+  }
+}
