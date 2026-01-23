@@ -31,59 +31,47 @@ export default function App() {
       <p>Create your professional CV</p>
 
       <div className="container">
+        {/* FORM */}
         <section className="form-section">
           <h2>Personal Information</h2>
 
           <input
-            type="text"
             name="fullName"
             placeholder="Full Name"
             value={formData.fullName}
             onChange={handleChange}
           />
-
           <input
-            type="text"
             name="jobTitle"
             placeholder="Job Title"
             value={formData.jobTitle}
             onChange={handleChange}
           />
-
           <input
-            type="email"
             name="email"
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
           />
-
           <input
-            type="tel"
             name="phone"
             placeholder="Phone"
             value={formData.phone}
             onChange={handleChange}
           />
-
           <input
-            type="text"
             name="location"
             placeholder="Location"
             value={formData.location}
             onChange={handleChange}
           />
-
           <input
-            type="url"
             name="linkedin"
             placeholder="LinkedIn URL"
             value={formData.linkedin}
             onChange={handleChange}
           />
-
           <input
-            type="url"
             name="github"
             placeholder="GitHub URL"
             value={formData.github}
@@ -94,7 +82,6 @@ export default function App() {
           <textarea
             rows="4"
             name="summary"
-            placeholder="Brief summary about yourself"
             value={formData.summary}
             onChange={handleChange}
           ></textarea>
@@ -103,7 +90,6 @@ export default function App() {
           <textarea
             rows="3"
             name="skills"
-            placeholder="React, JavaScript, HTML, CSS"
             value={formData.skills}
             onChange={handleChange}
           ></textarea>
@@ -112,7 +98,6 @@ export default function App() {
           <textarea
             rows="4"
             name="experience"
-            placeholder="Role, Company, Responsibilities"
             value={formData.experience}
             onChange={handleChange}
           ></textarea>
@@ -121,7 +106,6 @@ export default function App() {
           <textarea
             rows="3"
             name="education"
-            placeholder="Degree, Institute, Year"
             value={formData.education}
             onChange={handleChange}
           ></textarea>
@@ -130,61 +114,75 @@ export default function App() {
           <textarea
             rows="4"
             name="projects"
-            placeholder="Project name, tech stack, description"
             value={formData.projects}
             onChange={handleChange}
           ></textarea>
         </section>
-        <section className="preview-section">
-          <h2>{formData.fullName || "Your Name"}</h2>
-          <h4>{formData.jobTitle}</h4>
 
-          <p>
-            {formData.email}
-            {formData.phone && ` | ${formData.phone}`}
-          </p>
+        {/* PREVIEW */}
+        <section className="preview-section cv-preview">
 
-          <p>{formData.location}</p>
+          <button
+            className="print-btn preview-print-btn"
+            onClick={() => window.print()}
+          >
+            Download / Print PDF
+          </button>
 
-          <p>
-            {formData.linkedin && <span>LinkedIn </span>}
-            {formData.github && <span>| GitHub</span>}
-          </p>
+          <div className="cv-header">
+            <h1>{formData.fullName || "Your Name"}</h1>
+            <h2>{formData.jobTitle || "Frontend / React Developer"}</h2>
+          </div>
 
-          {formData.summary && (
-            <>
-              <h3>Summary</h3>
-              <p>{formData.summary}</p>
-            </>
-          )}
+          <div className="cv-body">
+            <aside className="cv-left">
+              <h3>CONTACT</h3>
+              <p>{formData.phone}</p>
+              <p>{formData.email}</p>
+              <p>{formData.location}</p>
 
-          {formData.skills && (
-            <>
-              <h3>Skills</h3>
-              <p>{formData.skills}</p>
-            </>
-          )}
+              {formData.linkedin && <p>LinkedIn</p>}
+              {formData.github && <p>GitHub</p>}
 
-          {formData.experience && (
-            <>
-              <h3>Experience</h3>
-              <p>{formData.experience}</p>
-            </>
-          )}
+              {formData.skills && (
+                <>
+                  <h3>SKILLS</h3>
+                  <p>{formData.skills}</p>
+                </>
+              )}
+            </aside>
 
-          {formData.education && (
-            <>
-              <h3>Education</h3>
-              <p>{formData.education}</p>
-            </>
-          )}
+            {/* RIGHT COLUMN */}
+            <main className="cv-right">
+              {formData.summary && (
+                <>
+                  <h3>PROFESSIONAL SUMMARY</h3>
+                  <p>{formData.summary}</p>
+                </>
+              )}
 
-          {formData.projects && (
-            <>
-              <h3>Projects</h3>
-              <p>{formData.projects}</p>
-            </>
-          )}
+              {formData.experience && (
+                <>
+                  <h3>EXPERIENCE</h3>
+                  <p>{formData.experience}</p>
+                </>
+              )}
+
+              {formData.education && (
+                <>
+                  <h3>EDUCATION</h3>
+                  <p>{formData.education}</p>
+                </>
+              )}
+
+              {formData.projects && (
+                <>
+                  <h3>PROJECTS</h3>
+                  <p>{formData.projects}</p>
+                </>
+              )}
+            </main>
+          </div>
         </section>
       </div>
     </div>
