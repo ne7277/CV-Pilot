@@ -1,0 +1,82 @@
+/* ===== Home Page ===== */
+.home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-header {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.home-header h1 {
+  font-size: 32px;
+  margin-bottom: 6px;
+}
+
+.home-header p {
+  color: #6b7280;
+}
+
+.home-body {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-container {
+  display: flex;
+  gap: 24px;
+}
+
+.primary-btn,
+.secondary-btn {
+  padding: 16px 28px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.primary-btn {
+  background-color: #6366f1;
+  color: #fff;
+}
+
+.primary-btn:hover {
+  background-color: #4f46e5;
+}
+
+.secondary-btn {
+  background-color: #ffffff;
+  color: #6366f1;
+  border: 2px solid #6366f1;
+}
+
+.secondary-btn:hover {
+  background-color: #eef2ff;
+}
+
+.home-footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .button-container {
+    flex-direction: column;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    width: 100%;
+  }
+}

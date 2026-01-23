@@ -1,10 +1,10 @@
-import CVForm from "./Component/CV Form/CVForm";
 import React from 'react'
+import HomePage from './Component/HomePage/HomePage';
 
 const App = () => {
   return (
     <div>
-      <CVForm />
+      <HomePage />
     </div>
   )
 }
