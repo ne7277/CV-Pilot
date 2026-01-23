@@ -1,5 +1,5 @@
 import React from 'react';
-import './marriagebiodata.css';
+import './BiodataBuilder.css'
 
 const marriagebiodata = () => {
   return (
