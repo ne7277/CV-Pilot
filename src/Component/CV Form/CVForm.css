@@ -171,3 +171,70 @@ h1 {
     display: none;
   }
 }
+.template-switcher {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.template-switcher button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background: #f3f4f6;
+  font-size: 13px;
+}
+
+.modern-layout {
+  display: grid;
+  grid-template-columns: 35% 65%;
+  gap: 20px;
+}
+
+.modern-left {
+  background: #111827;
+  color: #fff;
+  padding: 20px;
+}
+
+.modern-left h1 {
+  font-size: 24px;
+}
+
+.modern-left .title {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.modern-left h4 {
+  margin-top: 20px;
+}
+
+.modern-right h3 {
+  margin-top: 16px;
+  border-bottom: 1px solid #ccc;
+}
+
+.minimal-layout {
+  text-align: center;
+}
+
+.minimal-layout h1 {
+  font-size: 28px;
+}
+
+.minimal-layout h2 {
+  font-size: 16px;
+  color: #555;
+}
+
+.minimal-layout .contact {
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.minimal-layout hr {
+  margin: 16px 0;
+}
+
