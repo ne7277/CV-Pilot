@@ -1,6 +1,6 @@
 import React from 'react';
 import HomePage from './Component/HomePage/HomePage';
-import CVForm from './Component/CV Form/CVForm';
+import ProfessionalCVForm from './Component/CV Form/ProfessionalCVForm';
 import BiodataBuilder from './Component/Biodata Builder/BiodataBuilder';
 import { Routes, Route } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/cv" element={<CVForm />} />
+      <Route path="/cv" element={<ProfessionalCVForm />} />
       <Route path="/biodata" element={<BiodataBuilder />} />
     </Routes>
   );

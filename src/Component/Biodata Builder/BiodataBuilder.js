@@ -153,12 +153,11 @@ const MarriageBiodata = () => {
         <p>{data.education}</p>
 
         <h3>{labels[language].family}</h3>
-        <p>{labels[language].grandfather}: {data.grandfather}</p>
-        <p>{labels[language].father}: {data.father}</p>
-        <p>{labels[language].mother}: {data.mother}</p>
-        <p>{labels[language].brother}: {data.brother}</p>
-        <p>{labels[language].uncle}: {data.uncle}</p>
-
+        <p><b>{labels[language].grandfather}: {data.grandfather}</b></p>
+        <p><b>{labels[language].father}: {data.father}</b></p>
+        <p><b>{labels[language].mother}: {data.mother}</b></p>
+        <p><b>{labels[language].brother}: {data.brother}</b></p>
+        <p><b>{labels[language].uncle}: {data.uncle}</b></p>
         <p><b>{labels[language].residence}:</b> {data.residence}</p>
         <p><b>{labels[language].village}:</b> {data.village}</p>
         <p><b>{labels[language].contact}:</b> {data.contact}</p>
