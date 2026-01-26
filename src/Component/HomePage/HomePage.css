@@ -1,85 +1,313 @@
+/* =========================================================
+   GLOBAL LAYOUT (SINGLE CONTINUOUS BACKGROUND)
+========================================================= */
+
+.home-body {
+  position: relative;
+  min-height: calc(100vh - 220px);
+  display: flex;
+  align-items: flex-start; /* 👈 allow vertical breathing */
+  justify-content: center;
+  padding: 60px 20px 20px; /* 👈 more top space */
+  overflow: hidden;
+
+  background: radial-gradient(circle at top, #f0f4ff, #f8fafc);
+}
+
+/* Header & Footer inherit same background visually */
+.home-header,
+.home-footer {
+  background: radial-gradient(circle at top, #f0f4ff, #f8fafc);
+}
+
+/* =========================================================
+   CINEMATIC BACKGROUND TITLE (MOVED HIGHER)
+========================================================= */
+
+.home-body::before {
+  content: "CV-PILOT";
+  position: absolute;
+  top: 3%; /* 👈 moved higher */
+  left: 50%;
+  margin-bottom: 200px;
+  transform: translateX(-50%);
+  font-size: 220px;
+  font-weight: 900;
+  letter-spacing: 20px;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  color: rgba(37, 99, 235, 0.1);
+  animation: movieFloat 3s ease-in-out infinite;
+
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+
+@keyframes movieFloat {
+  0%   { transform: translate(-50%, 0); }
+  50%  { transform: translate(-50%, -25px); }
+  100% { transform: translate(-50%, 0); }
+}
+
+/* =========================================================
+   MOUSE GLOW EFFECT
+========================================================= */
+
+.mouse-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 110px;
+  height: 110px;
+
+  background: radial-gradient(
+    circle,
+    rgba(37, 99, 235, 0.45),
+    transparent 55%
+  );
+
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 0.06s linear;
+
+  z-index: 9999; 
+  will-change: transform;
+}
+
+
+/* =========================================================
+   SNOW / PARTICLE EFFECT
+========================================================= */
+
+.snow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.snow span {
+  position: absolute;
+  top: -10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+
+  background: rgba(37, 99, 235, 0.35);
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.35);
+
+  animation: snowFall linear infinite;
+  will-change: transform;
+}
+
+.snow span:nth-child(1) { left: 10%; animation-duration: 9s; }
+.snow span:nth-child(2) { left: 25%; animation-duration: 13s; }
+.snow span:nth-child(3) { left: 40%; animation-duration: 11s; }
+.snow span:nth-child(4) { left: 60%; animation-duration: 15s; }
+.snow span:nth-child(5) { left: 75%; animation-duration: 10s; }
+.snow span:nth-child(6) { left: 90%; animation-duration: 14s; }
+
+@keyframes snowFall {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(110vh);
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
 .home-header {
   text-align: center;
-  padding: 60px 20px 40px;
+  padding: 20px 20px 20px;
+  position: relative;
+  z-index: 2;
 }
 
 .home-header h1 {
-  font-size: 42px;
-  font-weight: 700;
-  margin-bottom: 10px;
+  font-size: 44px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  animation: fadeDown 0.6s ease;
 }
 
 .home-header p {
-  font-size: 16px;
-  color: #555;
+  font-size: 17px;
+  color: #4b5563;
   max-width: 600px;
   margin: 0 auto;
+  line-height: 1.6;
+  animation: fadeUp 0.8s ease;
 }
 
-.home-body {
-  min-height: calc(100vh - 220px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+/* =========================================================
+   TYPING ANIMATION
+========================================================= */
+
+.typing-wrapper {
+  display: inline-block;
 }
+
+.typing-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 6px;
+
+  border-right: 3px solid #2563eb;
+  color: #2563eb;
+  font-weight: 800;
+
+  width: 0;
+  animation:
+    typingLoop 4s steps(22, end) infinite,
+    blink 0.8s step-end infinite;
+}
+
+/* typing + deleting */
+@keyframes typingLoop {
+  0% {
+    width: 0;
+  }
+  40% {
+    width: 100%;
+  }
+  60% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+/* cursor blink */
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
 
 .hero-card {
+  position: relative;
+  z-index: 2;
+
+  margin-top: 100px;   /* 👈 move lower from center */
+
   background: linear-gradient(135deg, #ffffff, #f9fafb);
   border: 1px solid #e5e7eb;
-  border-radius: 16px;
+  border-radius: 18px;
+
   padding: 40px;
   max-width: 520px;
   width: 100%;
   text-align: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-  animation: fadeUp 0.5s ease;
+
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+  animation: fadeUp 0.6s ease;
+  overflow: hidden;
 }
+@media (max-width: 600px) {
+  .hero-card {
+    margin-top: 24px;
+  }
+}
+
 
 .hero-card h2 {
-  font-size: 24px;
-  margin-bottom: 12px;
+  padding: 0 0 10px;
+  
 }
 
-.hero-card p {
-  font-size: 15px;
-  color: #555;
-  margin-bottom: 28px;
+/* glow layer */
+.hero-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+
+  background: linear-gradient(
+    120deg,
+    rgba(37, 99, 235, 0.15),
+    rgba(59, 130, 246, 0.05),
+    rgba(37, 99, 235, 0.15)
+  );
+
+  animation: glowMove 8s linear infinite;
+  z-index: 0;
 }
+
+@keyframes glowMove {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+.hero-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
 
 .button-container {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
+  margin-top: 12px;
 }
 
-.primary-btn {
-  padding: 14px;
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 999px;
-  border: none;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: #fff;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.primary-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.35);
-}
-
+.primary-btn,
 .secondary-btn {
   padding: 14px;
   font-size: 15px;
   font-weight: 600;
   border-radius: 999px;
-  border: 2px solid #2563eb;
-  background: #fff;
-  color: #2563eb;
   cursor: pointer;
-  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.primary-btn {
+  border: none;
+  color: #fff;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(37, 99, 235, 0.35);
+}
+
+.primary-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: translateX(-100%);
+}
+
+.primary-btn:hover::after {
+  animation: shine 0.8s ease;
+}
+
+.secondary-btn {
+  background: #fff;
+  border: 2px solid #2563eb;
+  color: #2563eb;
 }
 
 .secondary-btn:hover {
@@ -87,30 +315,62 @@
   color: #fff;
 }
 
+/* =========================================================
+   FOOTER
+========================================================= */
+
 .home-footer {
   text-align: center;
-  padding: 20px;
+  padding: 30px 20px;
   font-size: 13px;
-  color: #666;
+  color: #6b7280;
+  position: relative;
+  z-index: 2;
 }
 
+/* =========================================================
+   GENERIC ANIMATIONS
+========================================================= */
+
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shine {
+  to { transform: translateX(100%); }
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
 @media (max-width: 600px) {
   .home-header h1 {
-    font-size: 34px;
+    font-size: 32px;
   }
 
   .hero-card {
-    padding: 30px 20px;
+    padding: 40px 20px 30px;
+    margin-top: 24px;
+  }
+
+  .typing-text {
+    border-right-width: 2px;
+  }
+
+  .home-body::before {
+    font-size: 80px;
+    top: 2%;
+  }
+
+  .mouse-glow {
+    width: 160px;
+    height: 160px;
   }
 }

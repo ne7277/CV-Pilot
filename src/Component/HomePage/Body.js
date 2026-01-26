@@ -5,18 +5,26 @@ const Body = () => {
 
   return (
     <main className="home-body">
+      
+      <div className="snow">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      
       <div className="hero-card">
-        <h2>Build documents that actually work</h2>
+        <h2>Build Professional CV that get noticed</h2>
         <p>
-          Choose what you want to create and get a clean, printable,
-          professional layout instantly.
+          CV-Pilot helps you choose what you want to create and get a clean,
+          printable, professional layout instantly.
         </p>
 
         <div className="button-container">
-          <button
-            className="primary-btn"
-            onClick={() => navigate("/cv")}
-          >
+          <button className="primary-btn" onClick={() => navigate("/cv")}>
             Create Professional CV
           </button>
 

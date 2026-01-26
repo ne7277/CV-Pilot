@@ -42,7 +42,9 @@
   font-family: "Times New Roman", serif;
   overflow: hidden;
   width: 210mm;
-  height: 297mm;          /* 🔑 lock to A4 */
+  height: 297mm;
+  position: sticky;
+  top: 24px;
   
 }
 

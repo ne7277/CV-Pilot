@@ -30,8 +30,7 @@ export default function ProfessionalCVForm() {
       header: { ...cv.header, [e.target.name]: e.target.value },
     });
 
-  const updateField = (key, value) =>
-    setCV({ ...cv, [key]: value });
+  const updateField = (key, value) => setCV({ ...cv, [key]: value });
 
   const updateArray = (section, index, key, value) => {
     const updated = [...cv[section]];
@@ -54,6 +53,27 @@ export default function ProfessionalCVForm() {
     setCV({ ...cv, [section]: updated });
   };
 
+  const hasAnyData = Object.values(cv).some((section) => {
+  if (Array.isArray(section)) {
+    return section.some((item) =>
+      Object.values(item).some(
+        (v) =>
+          (Array.isArray(v) && v.some(Boolean)) ||
+          (typeof v === "string" && v.trim())
+      )
+    );
+  }
+
+  if (typeof section === "object" && section !== null) {
+    return Object.values(section).some(
+      (v) => typeof v === "string" && v.trim()
+    );
+  }
+
+  return false;
+});
+
+
   const saveToLocalStorage = () => {
     localStorage.setItem("professional_cv_data", JSON.stringify(cv));
     alert("CV saved successfully!");
@@ -62,7 +82,7 @@ export default function ProfessionalCVForm() {
   const resetForm = () => {
     if (
       !window.confirm(
-        "This will clear the entire form and preview. Are you sure?"
+        "This will clear the entire form and preview. Are you sure?",
       )
     )
       return;
@@ -272,24 +292,37 @@ export default function ProfessionalCVForm() {
       </div>
 
       <div className="cv-preview a4">
-        <button className="print-btn" onClick={() => window.print()}>
+        {hasAnyData && (<button className="print-btn" onClick={() => window.print()}>
           Download PDF
-        </button>
+        </button>)}
 
         <div className="cv-header">
-          <h1>{cv.header.fullName || "Nehal"}</h1>
-          <p className="cv-subtitle">{cv.header.title}</p>
-          <p className="cv-contact">
-            {cv.header.email} | {cv.header.phone} | {cv.header.location}
-          </p>
+  {cv.header.fullName && <h1>{cv.header.fullName}</h1>}
 
-          {(cv.header.linkedin || cv.header.github) && (
-            <p className="cv-links">
-              {cv.header.linkedin && <>LinkedIn: {cv.header.linkedin}</>}
-              {cv.header.github && <> | GitHub: {cv.header.github}</>}
-            </p>
-          )}
-        </div>
+  {cv.header.title && (
+    <p className="cv-subtitle">{cv.header.title}</p>
+  )}
+
+  {(cv.header.email || cv.header.phone || cv.header.location) && (
+    <p className="cv-contact">
+      {cv.header.email && <span>{cv.header.email}</span>}
+      {cv.header.phone && <span> | {cv.header.phone}</span>}
+      {cv.header.location && <span> | {cv.header.location}</span>}
+    </p>
+  )}
+
+  {(cv.header.linkedin || cv.header.github) && (
+    <p className="cv-links">
+      {cv.header.linkedin && (
+        <span>LinkedIn: {cv.header.linkedin}</span>
+      )}
+      {cv.header.github && (
+        <span> | GitHub: {cv.header.github}</span>
+      )}
+    </p>
+  )}
+</div>
+
 
         {cv.summary && (
           <PreviewCard title="PROFESSIONAL SUMMARY">
@@ -297,57 +330,103 @@ export default function ProfessionalCVForm() {
           </PreviewCard>
         )}
 
-        <PreviewCard title="SKILLS">
-          <ul>
-            {cv.skills
-              .split(",")
-              .filter(Boolean)
-              .map((s, i) => (
-                <li key={i}>{s.trim()}</li>
+        {cv.skills && (
+          <PreviewCard title="SKILLS">
+            <ul>
+              {cv.skills
+                .split(",")
+                .filter(Boolean)
+                .map((s, i) => (
+                  <li key={i}>{s.trim()}</li>
+                ))}
+            </ul>
+          </PreviewCard>
+        )}
+
+        {Array.isArray(cv.experience) &&
+          cv.experience.some(
+            (e) =>
+              e.jobTitle ||
+              e.company ||
+              e.duration ||
+              (Array.isArray(e.bullets) && e.bullets.some(Boolean)),
+          ) && (
+            <PreviewCard title="PROFESSIONAL EXPERIENCE">
+              {cv.experience.map((e, i) => (
+                <div key={i} className="cv-item">
+                  {(e.jobTitle || e.company) && (
+                    <strong>
+                      {e.jobTitle} {e.company && `— ${e.company}`}
+                    </strong>
+                  )}
+
+                  {e.duration && <div className="cv-muted">{e.duration}</div>}
+
+                  {Array.isArray(e.bullets) && e.bullets.some(Boolean) && (
+                    <ul>
+                      {e.bullets.filter(Boolean).map((b, bi) => (
+                        <li key={bi}>{b}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
               ))}
-          </ul>
-        </PreviewCard>
+            </PreviewCard>
+          )}
 
-        <PreviewCard title="EXPERIENCE">
-          {cv.experience.map((e, i) => (
-            <div key={i} className="cv-item">
-              <strong>
-                {e.jobTitle} — {e.company}
-              </strong>
-              <div className="cv-muted">{e.duration}</div>
-              <ul>
-                {e.bullets.filter(Boolean).map((b, bi) => (
+        {Array.isArray(cv.projects) &&
+  cv.projects.some(
+    (p) =>
+      p.name ||
+      p.tech ||
+      (Array.isArray(p.bullets) && p.bullets.some(Boolean))
+  ) && (
+    <PreviewCard title="PROJECTS">
+      {cv.projects.map((p, i) => (
+        <div key={i} className="cv-item">
+          {p.name && <strong>{p.name}</strong>}
+
+          {p.tech && <div className="cv-muted">{p.tech}</div>}
+
+          {Array.isArray(p.bullets) && p.bullets.some(Boolean) && (
+            <ul>
+              {p.bullets
+                .filter(Boolean)
+                .map((b, bi) => (
                   <li key={bi}>{b}</li>
                 ))}
-              </ul>
-            </div>
-          ))}
-        </PreviewCard>
+            </ul>
+          )}
+        </div>
+      ))}
+    </PreviewCard>
+)}
 
-        <PreviewCard title="PROJECTS">
-          {cv.projects.map((p, i) => (
-            <div key={i} className="cv-item">
-              <strong>{p.name}</strong>
-              <div className="cv-muted">{p.tech}</div>
-              <ul>
-                {p.bullets.filter(Boolean).map((b, bi) => (
-                  <li key={bi}>{b}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </PreviewCard>
 
-        <PreviewCard title="EDUCATION">
-          {cv.education.map((e, i) => (
-            <div key={i} className="cv-item">
-              <strong>{e.degree}</strong>
-              <div className="cv-muted">
-                {e.institution} ({e.year})
-              </div>
+        {Array.isArray(cv.education) &&
+  cv.education.some(
+    (e) =>
+      e.degree ||
+      e.institution ||
+      e.year ||
+      (Array.isArray(e.bullets) && e.bullets.some(Boolean))
+  ) && (
+    <PreviewCard title="EDUCATION">
+      {cv.education.map((e, i) => (
+        <div key={i} className="cv-item">
+          {e.degree && <strong>{e.degree}</strong>}
+
+          {(e.institution || e.year) && (
+            <div className="cv-muted">
+              {e.institution}
+              {e.year && ` (${e.year})`}
             </div>
-          ))}
-        </PreviewCard>
+          )}
+        </div>
+      ))}
+    </PreviewCard>
+)}
+
       </div>
     </div>
   );
@@ -360,9 +439,7 @@ const Section = ({ title, children }) => (
   </section>
 );
 
-const Block = ({ children }) => (
-  <div className="cv-block">{children}</div>
-);
+const Block = ({ children }) => <div className="cv-block">{children}</div>;
 
 const PreviewCard = ({ title, children }) => (
   <div className="preview-card">
