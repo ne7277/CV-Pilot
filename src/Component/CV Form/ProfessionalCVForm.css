@@ -212,15 +212,7 @@ li {
 }
 
 @media print {
-  html,
-  body {
-    width: 210mm;
-    height: 297mm;
-    margin: 0;
-    padding: 0;
-    background: #fff;
-  }
-
+  
   body * {
     visibility: hidden;
   }
@@ -234,27 +226,26 @@ li {
     display: none !important;
   }
 
-  .cv-preview {
-    position: static;
-    width: 210mm;
-    min-height: 297mm;
-    padding: 22mm;
-    margin: 0;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-    overflow: visible;
-    page-break-after: always;
-  }
+  .cv-preview.a4 {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 210mm;
+  height: 297mm;
+  padding: 20mm;            
+
+  margin: 0;
+  background: #dde0e3;
+
+  box-shadow: none;
+  border-radius: 0;
+
+  overflow: hidden;        
 }
 
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+  .cv-form-wrapper {
+    display: none;
+
+
+}  }
